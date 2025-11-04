@@ -47,12 +47,20 @@
 
 .hero-content {
     max-width: 900px;
-    opacity: 1;
     visibility: visible;
     margin: 0; /* aligned to the left of the container */
     position: relative;
     z-index: 2;
     text-align: left;
+}
+
+.hero-content,
+.hero-content h2,
+.hero-content p {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    animation: none !important;
 }
 
 /* Make the hero heading very large and responsive using clamp */
