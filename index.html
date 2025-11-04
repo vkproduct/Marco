@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/styles/main.css">
 
     <script>
-    // Animation on scroll
+    // Animation on scroll (only for timeline)
     document.addEventListener('DOMContentLoaded', function() {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -18,15 +18,16 @@
                 }
             });
         }, {
-            threshold: 0.1
+            threshold: 0.1,
+            rootMargin: '0px'
         });
 
+        // Only observe timeline elements
         document.querySelectorAll('.timeline-step').forEach(step => {
             observer.observe(step);
         });
     });
     </script>
-
     
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript">
@@ -41,8 +42,6 @@
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/105110659" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <!-- /Yandex.Metrika counter -->
-
-
 </head>
 <body>
 
@@ -57,7 +56,7 @@
                 <nav>
                     <ul class="nav-menu">
                         <li><a href="#services">Услуги</a></li>
-                        <li><a href="#cases">Кейсы</a></li>
+                        <li><a href="">Кейсы</a></li>
                         <li><a href="#pricing">Цены</a></li>
                         <li><a href="#contact" class="cta-header">Оставить заявку</a></li>
                     </ul>
@@ -298,112 +297,6 @@
         </div>
     </section>
 
-    <!-- Case Studies -->
-    <section id="cases" class="cases">
-        <div class="container">
-            <h2 class="section-title">Результаты наших клиентов</h2>
-
-            <div class="case-card">
-                <div class="case-header">
-                    <div class="case-meta">
-                        <h4>Кейс</h4>
-                        <p>Промышленное предприятие</p>
-                    </div>
-                    <div class="case-meta">
-                        <h4>Отрасль</h4>
-                        <p>Производство упаковочного оборудования</p>
-                    </div>
-                    <div class="case-meta">
-                        <h4>Бюджет</h4>
-                        <p>300 000 ₽/месяц</p>
-                    </div>
-                </div>
-
-                <div class="case-results">
-                    <h4>Результаты за 3 месяца:</h4>
-                    <div class="results-grid">
-                        <div class="result-item">
-                            <p>Сокращение цикла сделки до 5 месяцев (-44%)</p>
-                        </div>
-                        <div class="result-item">
-                            <p>Снижение CAC до 110 000 ₽ (-39%)</p>
-                        </div>
-                        <div class="result-item">
-                            <p>Рост конверсии до 7% (+133%)</p>
-                        </div>
-                    </div>
-                    <p class="result-highlight">Экономия: 420 000 ₽/месяц</p>
-                </div>
-            </div>
-
-            <div class="case-card">
-                <div class="case-header">
-                    <div class="case-meta">
-                        <h4>Кейс</h4>
-                        <p>Логистическая компания</p>
-                    </div>
-                    <div class="case-meta">
-                        <h4>Отрасль</h4>
-                        <p>Грузоперевозки по России</p>
-                    </div>
-                    <div class="case-meta">
-                        <h4>Бюджет</h4>
-                        <p>200 000 ₽/месяц</p>
-                    </div>
-                </div>
-
-                <div class="case-results">
-                    <h4>Результаты за 4 месяца:</h4>
-                    <div class="results-grid">
-                        <div class="result-item">
-                            <p>Рост LTV до 89 000 ₽ (+98%)</p>
-                        </div>
-                        <div class="result-item">
-                            <p>Снижение CAC до 24 000 ₽ (-37%)</p>
-                        </div>
-                        <div class="result-item">
-                            <p>Повторные заказы: с 5% до 34%</p>
-                        </div>
-                    </div>
-                    <p class="result-highlight">Прирост прибыли: 520 000 ₽/месяц</p>
-                </div>
-            </div>
-
-            <div class="case-card">
-                <div class="case-header">
-                    <div class="case-meta">
-                        <h4>Кейс</h4>
-                        <p>Управляющая компания ЖКХ</p>
-                    </div>
-                    <div class="case-meta">
-                        <h4>Масштаб</h4>
-                        <p>12 000 квартир</p>
-                    </div>
-                    <div class="case-meta">
-                        <h4>Проблема</h4>
-                        <p>340 жалоб/месяц, собираемость 87%</p>
-                    </div>
-                </div>
-
-                <div class="case-results">
-                    <h4>Результаты за 2 месяца:</h4>
-                    <div class="results-grid">
-                        <div class="result-item">
-                            <p>Снижение жалоб до 95/месяц (-72%)</p>
-                        </div>
-                        <div class="result-item">
-                            <p>Рост собираемости до 94% (+7 п.п.)</p>
-                        </div>
-                        <div class="result-item">
-                            <p>Сокращение времени обработки на 60%</p>
-                        </div>
-                    </div>
-                    <p class="result-highlight">Дополнительный доход: 890 000 ₽/месяц</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Contact Form -->
     <section id="contact" class="contact-form">
         <div class="container">
@@ -539,7 +432,8 @@
             });
         }, { threshold: 0.1 });
 
-        document.querySelectorAll('section, .feature-card, .pain-card, .pricing-card').forEach(el => {
+        // Observe sections except the hero to avoid animating hero content on load
+        document.querySelectorAll('section:not(.hero), .feature-card, .pain-card, .pricing-card').forEach(el => {
             observer.observe(el);
         });
 
