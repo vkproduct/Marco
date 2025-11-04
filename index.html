@@ -2,6 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DataPulse - анализ маркетинга и повышение его эффективности</title>
     <meta name="description" content="Устраняем утечки маркетингового бюджета: возвращаем от 100 000 ₽ за 10 дней. Аудит и оптимизация для промышленности, логистики и ЖКХ.">
@@ -95,8 +96,31 @@
             font-weight: 700;
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
             text-decoration: none;
+        }
+
+        /* Ensure the header site title (h1) stays visually small and doesn't inherit global h1 styles */
+        header .site-title {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: none; /* override global h1 uppercase */
+            background: transparent;
+        }
+
+        /* Screen-reader / visually hidden helper (keeps text available to crawlers and SRs but hidden visually) */
+        .visually-hidden {
+            position: absolute !important;
+            width: 1px !important;
+            height: 1px !important;
+            padding: 0 !important;
+            margin: -1px !important;
+            overflow: hidden !important;
+            clip: rect(0 0 0 0) !important;
+            white-space: nowrap !important;
+            border: 0 !important;
         }
 
         .nav-menu {
@@ -176,6 +200,18 @@
             line-height: 1.2;
         }
 
+        /* When main hero heading is an h2 (semantic change), keep the same visual styling */
+        .hero h2 {
+            font-size: 5.0rem;
+            margin-bottom: 2rem;
+            line-height: 1.2;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+        }
+
         .hero-subtitle {
             font-size: 1.0rem;
             margin-bottom: 3rem;
@@ -226,84 +262,286 @@
             color: var(--text-secondary);
         }
 
-        /* Card Grid Section */
-        .card-grid-section {
-            padding: 100px 0;
+        /* Process Timeline Section */
+        .process-timeline-section {
+            padding: 120px 0;
             background: var(--bg-dark);
             position: relative;
             z-index: 10;
-        }
-
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            margin-top: 3rem;
-        }
-
-        .feature-card {
-            background: var(--bg-card);
-            border-radius: 20px;
             overflow: hidden;
-            transition: all 0.4s ease;
-            position: relative;
-            height: 400px;
-            cursor: pointer;
         }
 
-        .feature-card::before {
+        .process-timeline-section::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(180deg, transparent 0%, rgba(10, 10, 10, 0.9) 100%);
-            z-index: 1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 1000px;
+            height: 1000px;
+            background: radial-gradient(circle, rgba(161, 0, 255, 0.08) 0%, transparent 70%);
+            pointer-events: none;
         }
 
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(161, 0, 255, 0.3);
+        .timeline-wrapper {
+            position: relative;
+            margin-top: 80px;
+            padding: 60px 0;
         }
 
-        .feature-card-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .feature-card-content {
+        /* Timeline Line */
+        .timeline-line {
             position: absolute;
-            bottom: 0;
+            top: 24%;
+            left: 10%;
+            right: 10%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            transform: translateY(-50%);
+        }
+
+        .timeline-progress {
+            position: absolute;
             left: 0;
-            right: 0;
-            padding: 30px;
+            top: 0;
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            border-radius: 10px;
+            animation: progressAnimation 3s ease-out forwards;
+        }
+
+        @keyframes progressAnimation {
+            to {
+                width: 100%;
+            }
+        }
+
+        /* Timeline Steps */
+        .timeline-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            position: relative;
+        }
+
+        .timeline-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            opacity: 0;
+            animation: stepFadeIn 0.6s ease-out forwards;
+        }
+
+        .timeline-step:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .timeline-step:nth-child(2) {
+            animation-delay: 0.6s;
+        }
+
+        .timeline-step:nth-child(3) {
+            animation-delay: 1s;
+        }
+
+        .timeline-step:nth-child(4) {
+            animation-delay: 1.4s;
+        }
+
+        @keyframes stepFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Step Label Marker */
+        .step-label-marker {
+            position: relative;
+            margin-bottom: 35px;
             z-index: 2;
         }
 
-        .feature-card-tag {
+        .step-label {
             display: inline-block;
-            background: rgba(161, 0, 255, 0.3);
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
             color: var(--text-primary);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            margin-bottom: 10px;
+            padding: 12px 28px;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.12em;
+            box-shadow: 0 10px 30px rgba(161, 0, 255, 0.4);
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 2;
         }
 
-        .feature-card h3 {
+        .timeline-step:hover .step-label {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(161, 0, 255, 0.6);
+        }
+
+        /* Pulse Effect for Labels */
+        .label-pulse {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            border-radius: 25px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            opacity: 0.3;
+            animation: labelPulse 2s ease-out infinite;
+            z-index: 1;
+        }
+
+        .timeline-step:nth-child(2) .label-pulse {
+            animation-delay: 0.5s;
+        }
+
+        .timeline-step:nth-child(3) .label-pulse {
+            animation-delay: 1s;
+        }
+
+        .timeline-step:nth-child(4) .label-pulse {
+            animation-delay: 1.5s;
+        }
+
+        @keyframes labelPulse {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.3;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 0;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1.4);
+                opacity: 0;
+            }
+        }
+
+        /* Step Content */
+        .step-content {
+            max-width: 280px;
+        }
+
+        .step-content h3 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .step-content p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Industries Mini Grid */
+        .industries-mini-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 80px;
+        }
+
+        .industry-mini-card {
+            background: var(--bg-card);
+            padding: 30px 25px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .industry-mini-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(161, 0, 255, 0.2);
+        }
+
+        .industry-mini-card h4 {
             font-size: 1.25rem;
-            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            margin-bottom: 10px;
         }
 
-        .feature-card p {
+        .industry-mini-card p {
             font-size: 0.95rem;
             color: var(--text-secondary);
+            margin: 0;
         }
 
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .timeline-steps {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 60px 40px;
+            }
+
+            .timeline-line {
+                display: none;
+            }
+
+            .industries-mini-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .process-timeline-section {
+                padding: 80px 0;
+            }
+
+            .timeline-steps {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+
+            .step-label {
+                padding: 10px 24px;
+                font-size: 0.75rem;
+            }
+
+            .step-label-marker {
+                margin-bottom: 30px;
+            }
+
+            .step-content h3 {
+                font-size: 1.25rem;
+            }
+
+            .step-content p {
+                font-size: 0.95rem;
+            }
+
+            .industries-mini-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .industry-mini-card {
+                padding: 25px 20px;
+            }
+        }
+
+        /* Additional Animation on Scroll */
+        .timeline-step.visible {
+            animation: stepFadeIn 0.6s ease-out forwards;
+        }
         /* Value Section */
         .value-section {
             padding: 120px 0;
@@ -322,6 +560,7 @@
             margin-bottom: 2rem;
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
@@ -566,6 +805,7 @@
             font-weight: 700;
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 2rem;
         }
@@ -941,6 +1181,42 @@
             background: var(--accent-color);
         }
     </style>
+
+    <script>
+    // Animation on scroll
+    document.addEventListener('DOMContentLoaded', function() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        document.querySelectorAll('.timeline-step').forEach(step => {
+            observer.observe(step);
+        });
+    });
+    </script>
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){
+            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=105110659', 'ym');
+
+        ym(105110659, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/105110659" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+
+
 </head>
 <body>
 
@@ -948,7 +1224,10 @@
     <header>
         <div class="container">
             <div class="header-content">
-                <a href="#" class="logo">DataPulse</a>
+                <h1 class="site-title">
+                    <a href="#" class="logo">DataPulse</a>
+                    <span class="visually-hidden"> - маркетинговый анализ, маркетинговые исследования ниш и аудит digital-маркетинговой стратегии для производителей и интернет-магазинов</span>
+                </h1>
                 <nav>
                     <ul class="nav-menu">
                         <li><a href="#services">Услуги</a></li>
@@ -965,90 +1244,94 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>Устраняем<br>утечки<br>маркетингового бюджета</h1>
+                <h2>Устраняем<br>утечки<br>маркетингового бюджета</h2>
                 <p class="hero-subtitle">Аудит маркетинговых процессов и объективный анализ на основе данных</p>
                 <a href="#contact" class="cta-button">Оставить заявку</a>
             </div>
         </div>
     </section>
 
-    <!-- Card Grid Section -->
-    <section id="services" class="card-grid-section">
+    <!-- Process Timeline Section - UPDATED WITH LABELS -->
+    <section id="services" class="process-timeline-section">
         <div class="container">
             <h2 class="section-title">Как мы решаем ваши задачи</h2>
             
-            <div class="cards-grid">
-                <div class="feature-card">
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Crect fill='%23A100FF' width='400' height='400'/%3E%3Cg fill-opacity='0.1'%3E%3Cpath fill='%2300D4FF' d='M200 100 L300 200 L200 300 L100 200 Z'/%3E%3C/g%3E%3C/svg%3E" alt="Аудит данных" class="feature-card-image">
-                    <div class="feature-card-content">
-                        <span class="feature-card-tag">Этап 1</span>
-                        <h3>Аудит данных и процессов</h3>
-                        <p>Анализ unit-экономики всех каналов привлечения</p>
+            <div class="timeline-wrapper">
+                <!-- Progress Line -->
+                <div class="timeline-line">
+                    <div class="timeline-progress"></div>
+                </div>
+                
+                <!-- Timeline Steps -->
+                <div class="timeline-steps">
+                    <!-- Step 1 -->
+                    <div class="timeline-step" data-step="1">
+                        <div class="step-label-marker">
+                            <span class="step-label">ЭТАП 1</span>
+                            <div class="label-pulse"></div>
+                        </div>
+                        <div class="step-content">
+                            <h3>Аудит данных и процессов</h3>
+                            <p>Анализ unit-экономики всех каналов привлечения</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="timeline-step" data-step="2">
+                        <div class="step-label-marker">
+                            <span class="step-label">ЭТАП 2</span>
+                            <div class="label-pulse"></div>
+                        </div>
+                        <div class="step-content">
+                            <h3>Process Mining</h3>
+                            <p>Выявление узких мест в воронке продаж</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="timeline-step" data-step="3">
+                        <div class="step-label-marker">
+                            <span class="step-label">ЭТАП 3</span>
+                            <div class="label-pulse"></div>
+                        </div>
+                        <div class="step-content">
+                            <h3>Диагностика утечек</h3>
+                            <p>Определение точек потери лидов и клиентов</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="timeline-step" data-step="4">
+                        <div class="step-label-marker">
+                            <span class="step-label">ЭТАП 4</span>
+                            <div class="label-pulse"></div>
+                        </div>
+                        <div class="step-content">
+                            <h3>План оптимизации</h3>
+                            <p>Дорожная карта внедрения на 90 дней</p>
+                        </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="feature-card">
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Crect fill='%2300D4FF' width='400' height='400'/%3E%3Cg fill-opacity='0.1'%3E%3Ccircle fill='%23A100FF' cx='200' cy='200' r='100'/%3E%3C/g%3E%3C/svg%3E" alt="Process Mining" class="feature-card-image">
-                    <div class="feature-card-content">
-                        <span class="feature-card-tag">Этап 2</span>
-                        <h3>Process Mining</h3>
-                        <p>Выявление узких мест в воронке продаж</p>
-                    </div>
+            <!-- Industries Mini Grid Below Timeline -->
+            <div class="industries-mini-grid">
+                <div class="industry-mini-card">
+                    <h4>Промышленность</h4>
+                    <p>Оптимизация B2B-воронки</p>
                 </div>
-
-                <div class="feature-card">
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Crect fill='%23FF3366' width='400' height='400'/%3E%3Cg fill-opacity='0.1'%3E%3Crect fill='%23A100FF' x='100' y='100' width='200' height='200'/%3E%3C/g%3E%3C/svg%3E" alt="Диагностика утечек" class="feature-card-image">
-                    <div class="feature-card-content">
-                        <span class="feature-card-tag">Этап 3</span>
-                        <h3>Диагностика утечек</h3>
-                        <p>Определение точек потери лидов и клиентов</p>
-                    </div>
+                <div class="industry-mini-card">
+                    <h4>Логистика</h4>
+                    <p>Снижение CAC и рост LTV</p>
                 </div>
-
-                <div class="feature-card">
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Crect fill='%2300FF87' width='400' height='400'/%3E%3Cg fill-opacity='0.1'%3E%3Cpolygon fill='%2300D4FF' points='200,50 350,200 200,350 50,200'/%3E%3C/g%3E%3C/svg%3E" alt="План оптимизации" class="feature-card-image">
-                    <div class="feature-card-content">
-                        <span class="feature-card-tag">Этап 4</span>
-                        <h3>План оптимизации</h3>
-                        <p>Дорожная карта внедрения на 90 дней</p>
-                    </div>
+                <div class="industry-mini-card">
+                    <h4>ЖКХ</h4>
+                    <p>Снижение жалоб на 72%</p>
                 </div>
-
-                <!--<div class="feature-card">
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Crect fill='%230066FF' width='400' height='400'/%3E%3Cg fill-opacity='0.1'%3E%3Ccircle fill='%23A100FF' cx='150' cy='150' r='80'/%3E%3Ccircle fill='%2300D4FF' cx='250' cy='250' r='80'/%3E%3C/g%3E%3C/svg%3E" alt="Промышленность" class="feature-card-image">
-                    <div class="feature-card-content">
-                        <span class="feature-card-tag">Отрасль</span>
-                        <h3>Промышленность</h3>
-                        <p>Оптимизация B2B-воронки и сокращение цикла сделки</p>
-                    </div>
+                <div class="industry-mini-card">
+                    <h4>Результат</h4>
+                    <p>Измеримый ROI с первого месяца</p>
                 </div>
-
-                <div class="feature-card">
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Crect fill='%23A100FF' width='400' height='400'/%3E%3Cg fill-opacity='0.2'%3E%3Crect fill='%2300FF87' x='50' y='150' width='300' height='100'/%3E%3C/g%3E%3C/svg%3E" alt="Логистика" class="feature-card-image">
-                    <div class="feature-card-content">
-                        <span class="feature-card-tag">Отрасль</span>
-                        <h3>Логистика</h3>
-                        <p>Снижение CAC и увеличение LTV клиентов</p>
-                    </div>
-                </div>
-
-                <div class="feature-card">
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Crect fill='%2300D4FF' width='400' height='400'/%3E%3Cg fill-opacity='0.15'%3E%3Crect fill='%23FF3366' x='100' y='50' width='200' height='300'/%3E%3C/g%3E%3C/svg%3E" alt="ЖКХ" class="feature-card-image">
-                    <div class="feature-card-content">
-                        <span class="feature-card-tag">Отрасль</span>
-                        <h3>ЖКХ</h3>
-                        <p>Снижение жалоб и повышение собираемости платежей</p>
-                    </div>
-                </div>
-
-                <div class="feature-card">
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Crect fill='%23FF3366' width='400' height='400'/%3E%3Cg fill-opacity='0.1'%3E%3Cpath fill='%23A100FF' d='M100,200 Q200,100 300,200 T500,200' stroke='%2300D4FF' stroke-width='2' fill='none'/%3E%3C/g%3E%3C/svg%3E" alt="Результаты" class="feature-card-image">
-                    <div class="feature-card-content">
-                        <span class="feature-card-tag">Результат</span>
-                        <h3>Измеримый ROI</h3>
-                        <p>Каждая рекомендация с прогнозом экономии</p>
-                    </div>
-                </div> -->
             </div>
         </div>
     </section>
