@@ -1,0 +1,117 @@
+/* Hero Section (dedicated file) */
+.hero {
+    background: var(--bg-dark);
+    padding: 160px 0 100px;
+    position: relative;
+    overflow: hidden;
+    height: 100vh;
+}
+
+.hero::before,
+.hero::after {
+    pointer-events: none;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 60px;
+    right: 80px;
+    width: 900px;
+    height: 900px;
+    background: radial-gradient(circle at 30% 30%, rgba(161, 0, 255, 0.16) 0%, transparent 55%);
+    border-radius: 50%;
+    filter: blur(40px);
+    opacity: 0.95;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 40%;
+    right: 260px;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle at 50% 50%, rgba(0, 20, 60, 0.85) 0%, rgba(0,0,0,0) 60%), radial-gradient(circle, rgba(0, 212, 255, 0.08) 0%, transparent 60%), radial-gradient(circle, rgba(161, 0, 255, 0.06) 0%, transparent 60%);
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.9;
+}
+
+
+.hero .container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* keep content on the left side */
+    min-height: 360px; /* slightly shorter by default */
+}
+
+.hero-content {
+    max-width: 900px;
+    margin: 0; /* aligned to the left of the container */
+    position: relative;
+    z-index: -1;
+    text-align: left;
+}
+
+/* Make the hero heading very large and responsive using clamp */
+.hero-content h2,
+.hero-title {
+    font-weight: 800;
+    line-height: 1.02;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    background: linear-gradient(90deg, var(--primary-color) 0%, var(--accent-color) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: clamp(3.25rem, 9vw, 6.0rem); 
+}
+
+.hero-subtitle {
+    font-size: 1.05rem;
+    margin-bottom: 24px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    max-width: 560px;
+    opacity: 0.95;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 18px;
+    margin-top: 10px;
+}
+
+.hero-note {
+    margin-top: 20px;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+
+@media (max-width: 1024px) {
+    .hero { padding: 140px 0 60px; }
+    .hero .container { min-height: 320px; }
+    .hero-title { font-size: 2.75rem; }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        padding: 110px 0 50px;
+    }
+
+    .hero-title { font-size: 2.15rem; }
+    .hero .container { min-height: 260px; }
+    .hero-content { padding: 0 16px; }
+    .hero .container { align-items: flex-start; }
+}
+
+@media (max-width: 480px) {
+    .hero { padding: 90px 0 40px; }
+    .hero-title { font-size: 1.5rem; }
+    .hero-subtitle { max-width: 100%; font-size: 0.95rem; }
+    .hero .container { min-height: 220px; align-items: flex-start; }
+    .hero-content { padding: 0 12px; }
+    .hero-actions { flex-direction: column; align-items: stretch; }
+}

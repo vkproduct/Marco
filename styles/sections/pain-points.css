@@ -1,0 +1,55 @@
+/* Pain Points Section */
+.pain-points {
+    padding: 100px 0;
+    background: var(--bg-dark);
+}
+
+.pain-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 3rem;
+}
+
+.pain-card {
+    background: var(--bg-card);
+    padding: 40px;
+    border-radius: 20px;
+    border-left: 4px solid var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.pain-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 60px rgba(161, 0, 255, 0.2);
+}
+
+.pain-card h3 {
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.pain-card ul {
+    list-style: none;
+}
+
+.pain-card li {
+    padding: 12px 0;
+    padding-left: 30px;
+    position: relative;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.pain-card li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--warning);
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+@media (max-width: 768px) { .pain-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .pain-grid { grid-template-columns: 1fr; } }

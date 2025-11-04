@@ -1,0 +1,25 @@
+/* Cases / Results Section */
+.cases {
+    padding: var(--section-padding) 0;
+}
+
+.cases-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 28px;
+    margin-top: 40px;
+}
+
+.case-card {
+    background: var(--bg-card);
+    border-radius: 16px;
+    padding: 24px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.case-card:hover { transform: translateY(-6px); box-shadow: 0 30px 60px rgba(0,0,0,0.45); }
+
+.case-results { margin-top: 16px; background: linear-gradient(135deg, rgba(0, 255, 135, 0.03), rgba(0,212,255,0.03)); padding: 18px; border-radius: 10px; }
+
+@media (max-width: 768px) { .cases-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .cases-grid { grid-template-columns: 1fr; } }

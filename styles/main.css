@@ -1,0 +1,74 @@
+/* Base imports */
+@import url('base/variables.css');
+@import url('base/reset.css');
+@import url('base/typography.css');
+
+/* Layout imports */
+@import url('layout/header.css');
+@import url('layout/footer.css');
+@import url('layout/grid.css');
+@import url('layout/container.css');
+
+/* Components imports */
+@import url('components/buttons.css');
+@import url('components/cards.css');
+@import url('components/forms.css');
+@import url('components/navigation.css');
+
+/* Section imports */
+@import url('sections/hero.css');
+@import url('sections/timeline.css');
+@import url('sections/companies.css');
+@import url('sections/pricing.css');
+@import url('sections/cases.css');
+@import url('sections/value.css');
+@import url('sections/pain-points.css');
+@import url('sections/contact.css');
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.fade-in {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+/* Smooth Scroll */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-color);
+}
